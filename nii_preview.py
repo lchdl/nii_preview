@@ -17,6 +17,7 @@ glyph = [
     np.transpose(np.array([[0,0,0,0,0,0],[0,0,1,1,0,0],[0,1,0,0,1,0],[0,1,0,0,1,0],[0,0,1,1,1,0],[0,0,0,0,1,0],[0,1,1,1,0,0],[0,0,0,0,0,0]]))
 ]
 
+# https://answers.opencv.org/question/90455/how-to-perform-intersection-or-union-operations-on-a-rect-in-python/
 def _rect_intersect(a, b):
     '''
     a: (x1,y1,w1,h1)
