@@ -23,8 +23,8 @@ here is an example of how to use it
 ## Output Example
 Below is an example of using "lightbox()" function to generate a preview of a 3D NIFTI file. "view_axis" is set to "coronal".
 Note that slice number is also indicated in the upper left corner. I carefully adjusted the behaviour of "lightbox()" to
-ensure that the visualization result is the same with that of MIPAV ([link](https://mipav.cit.nih.gov/)) and ITK-SNAP 
-([link](http://www.itksnap.org/pmwiki/pmwiki.php)).
+ensure that the visualization result is the same with that of [MIPAV](https://mipav.cit.nih.gov/) and 
+[ITK-SNAP](http://www.itksnap.org/pmwiki/pmwiki.php).
 
 <p align="center">
   <img 
