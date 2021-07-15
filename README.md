@@ -14,6 +14,6 @@ here is an example of how to use it
 <p align="left">
   <img 
        src="https://github.com/lchdl/nii_preview/blob/main/how_to_use.png"
-       width="600"
+       width="800"
   />
 </p>
