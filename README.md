@@ -12,9 +12,9 @@ but also, you need to install the following Python packages (ignore if you alrea
 here is an example of how to use it
 
 > from nii_preview import lightbox
-> \# Generate a 4x5 image preview, view axis is set to 'axial', 
-> \# file will be saved to 'axial_preview.png'.
+> "\#" Generate a 4x5 image preview, view axis is set to 'axial', 
+> "\#" file will be saved to 'axial_preview.png'.
 > lightbox('/location/to/your/sample/file.nii.gz', 4, 5,'axial_preview.png', view_axis='axial')
-> \# However, you can set "view_axis" to "coronal" or "sagittal" 
+> "\#" However, you can set "view_axis" to "coronal" or "sagittal" 
 > lightbox('/location/to/your/sample/file.nii.gz', 4, 5,'axial_preview.png', view_axis='coronal')
 > lightbox('/location/to/your/sample/file.nii.gz', 4, 5,'axial_preview.png', view_axis='sagittal')
