@@ -26,7 +26,7 @@ Note that slice number is also indicated in the upper left corner. I carefully a
 ensure that the visualization result is the same with that of [MIPAV](https://mipav.cit.nih.gov/) and 
 [ITK-SNAP](http://www.itksnap.org/pmwiki/pmwiki.php).
 
-<p align="center">
+<p align="left">
   <img 
        src="https://github.com/lchdl/nii_preview/blob/main/lightbox_coronal.png"
        width="800"
