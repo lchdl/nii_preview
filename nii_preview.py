@@ -4,6 +4,7 @@ import numpy as np
 from matplotlib.pyplot import imsave
 import nibabel as nib
 
+# Hard-coded character '0'~'9'
 glyph = [
     np.transpose(np.array([[0,0,0,0,0,0],[0,0,1,1,0,0],[0,1,0,0,1,0],[0,1,0,0,1,0],[0,1,0,0,1,0],[0,1,0,0,1,0],[0,0,1,1,0,0],[0,0,0,0,0,0]])),
     np.transpose(np.array([[0,0,0,0,0,0],[0,0,1,1,0,0],[0,1,0,1,0,0],[0,0,0,1,0,0],[0,0,0,1,0,0],[0,0,0,1,0,0],[0,1,1,1,1,0],[0,0,0,0,0,0]])),
