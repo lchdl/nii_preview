@@ -17,3 +17,13 @@ here is an example of how to use it
        width="800"
   />
 </p>
+
+## Output Example
+Below is an example of using "lightbox()" function to generate a preview of a 3D NIFTI file. "view_axis" is set to "coronal".
+
+<p align="center">
+  <img 
+       src="https://github.com/lchdl/nii_preview/blob/main/lightbox_coronal.png"
+       width="800"
+  />
+</p>
