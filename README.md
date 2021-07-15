@@ -11,9 +11,9 @@ but also, you need to install the following Python packages (ignore if you alrea
 ## How to use
 here is an example of how to use it
 
-<p align="center">
+<p align="left">
   <img 
        src="https://github.com/lchdl/nii_preview/blob/main/how_to_use.png"
-       width="350"
+       width="600"
   />
 </p>
