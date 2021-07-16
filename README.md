@@ -45,3 +45,12 @@ lightbox('original_image.nii.gz', 4,5,'test_lightbox3.png',view_axis='coronal',
     nii_mask='segmentation.nii.gz', color_palette=[(255,0,0)],blend_weight=0.5,
     resample=0.5, font_size=2)
 </pre>
+
+Will generates the following output:
+
+<p align="left">
+  <img 
+       src="https://github.com/lchdl/nii_preview/blob/main/resample_and_overlay.png"
+       width="800"
+  />
+</p>
