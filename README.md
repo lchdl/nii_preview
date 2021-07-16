@@ -9,7 +9,6 @@ But also, you need to install the following Python packages (ignore if you alrea
 > 1) **matplotlib** (any version should work)
 > 2) **numpy** (any version should work)
 > 3) **nibabel** (used for loading "\*.nii" or "\*.nii.gz" files, recommend version >=3.2.1, but lower version is OK I guess)
-> 4) **scipy**
 
 ## How to use
 here is an example of how to use it
@@ -40,8 +39,9 @@ Now I added support for **image resampling** (for propoerly visualizing images w
 Example:
 
 <pre>
-# draw mask on image, also resample the image to have isotropic resolution
-# setting font size and blend weight 
+# Draw red mask (255,0,0) on image, also resample the image to have isotropic resolution 
+# (0.5mm*0.5mm*0.5mm in this example), setting font size (x2 than normal size) and blend weight (=0.5),
+# coronal view. 4 rows, 5 columns.
 lightbox('original_image.nii.gz', 4,5,'test_lightbox3.png',view_axis='coronal',
     <b>nii_mask='segmentation.nii.gz'</b>, <b>color_palette=[(255,0,0)]</b>,blend_weight=0.5,
     <b>resample=0.5</b>, font_size=2)
