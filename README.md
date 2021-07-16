@@ -9,6 +9,7 @@ But also, you need to install the following Python packages (ignore if you alrea
 > 1) **matplotlib** (any version should work)
 > 2) **numpy** (any version should work)
 > 3) **nibabel** (used for loading "\*.nii" or "\*.nii.gz" files, recommend version >=3.2.1, but lower version is OK I guess)
+> 4) **scipy**
 
 ## How to use
 here is an example of how to use it
