@@ -42,8 +42,8 @@ Example:
 # draw mask on image, also resample the image to have isotropic resolution
 # setting font size and blend weight 
 lightbox('original_image.nii.gz', 4,5,'test_lightbox3.png',view_axis='coronal',
-    <b>nii_mask='segmentation.nii.gz'<\b>, <b>color_palette=[(255,0,0)]<\b>,blend_weight=0.5,
-    <b>resample=0.5<\b>, font_size=2)
+    <b>nii_mask='segmentation.nii.gz'</b>, <b>color_palette=[(255,0,0)]</b>,blend_weight=0.5,
+    <b>resample=0.5</b>, font_size=2)
 </pre>
 
 Will generates the following output:
