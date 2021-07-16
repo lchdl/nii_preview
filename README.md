@@ -33,8 +33,8 @@ ensure that the visualization result is the same with that of [MIPAV](https://mi
   />
 </p>
 
-Now I added support for image resampling (for propoerly visualizing images with anisotropic resolution) and 
-color overlays (such as visualizing lesions).
+Now I added support for **image resampling** (for propoerly visualizing images with anisotropic resolution) and 
+**color overlays** (such as visualizing lesions).
 
 Example:
 
