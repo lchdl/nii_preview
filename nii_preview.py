@@ -7,7 +7,7 @@ from scipy.ndimage import zoom
 import nibabel as nib
 from nibabel import processing as nibproc # used for resample images
 
-
+# hard coded character '0'~'9'.
 glyph = [
     np.transpose(np.array([[0,0,0,0,0,0],[0,0,1,1,0,0],[0,1,0,0,1,0],[0,1,0,0,1,0],[0,1,0,0,1,0],[0,1,0,0,1,0],[0,0,1,1,0,0],[0,0,0,0,0,0]])),
     np.transpose(np.array([[0,0,0,0,0,0],[0,0,1,1,0,0],[0,1,0,1,0,0],[0,0,0,1,0,0],[0,0,0,1,0,0],[0,0,0,1,0,0],[0,1,1,1,1,0],[0,0,0,0,0,0]])),
@@ -21,6 +21,8 @@ glyph = [
     np.transpose(np.array([[0,0,0,0,0,0],[0,0,1,1,0,0],[0,1,0,0,1,0],[0,1,0,0,1,0],[0,0,1,1,1,0],[0,0,0,0,1,0],[0,1,1,1,0,0],[0,0,0,0,0,0]]))
 ]
 
+# _rect_intersect():
+# utility function to calculate the intersection of the two rectangles (x,y,w,h)
 def _rect_intersect(a, b):
     '''
     a: (x1,y1,w1,h1)
@@ -33,35 +35,39 @@ def _rect_intersect(a, b):
     if w<0 or h<0: return (x,y,0,0) # or (0,0,0,0) ?
     return (x, y, w, h)
 
-def _paste_slice(slice_data, image, x, y):
+# _paste_slice(): copy and paste an image slice to another image
+# here (x,y) indicates the upper-left coordinates of the destination position 
+# this function is designed to be robust and it can handle out of bound values
+# carefully.
+def _paste_slice(src, dst, x, y):
     '''
     slice shape: (MxN) or (MxNx3) for a RGB slice
     image shape: (MxNx3)
     '''
-    shp = slice_data.shape
-    if x>=0 and y>=0 and x+shp[0]<=image.shape[0] and y+shp[1]<=image.shape[1]:
-        if len(slice_data.shape)==2:
+    shp = src.shape
+    if x>=0 and y>=0 and x+shp[0]<=dst.shape[0] and y+shp[1]<=dst.shape[1]:
+        if len(src.shape)==2:
             for ch in range(3): # channel broadcast
-                image[x:x+shp[0],y:y+shp[1],ch]=slice_data
+                dst[x:x+shp[0],y:y+shp[1],ch]=src
         else:
-            image[x:x+shp[0],y:y+shp[1]]=slice_data
-        return image
+            dst[x:x+shp[0],y:y+shp[1]]=src
+        return dst
     else:
         # out of bounds
         src_rect = (x,y,shp[0],shp[1])
-        dst_rect = (0,0,image.shape[0],image.shape[1])
+        dst_rect = (0,0,dst.shape[0],dst.shape[1])
         ist_rect = _rect_intersect(src_rect, dst_rect)
         if ist_rect[2] == 0 or ist_rect[3] == 0:
-            return image # no intersection
+            return dst # no intersection
         src_offset = ( ist_rect[0]-x, ist_rect[1]-y )
-        if len(slice_data.shape)==2:
+        if len(src.shape)==2:
             for ch in range(3): # channel broadcast
-                image[ist_rect[0]:ist_rect[0]+ist_rect[2], ist_rect[1]:ist_rect[1]+ist_rect[3], ch ]=\
-                    slice_data[src_offset[0]:src_offset[0]+ist_rect[2], src_offset[1]:src_offset[1]+ist_rect[3]]
+                dst[ist_rect[0]:ist_rect[0]+ist_rect[2], ist_rect[1]:ist_rect[1]+ist_rect[3], ch ]=\
+                    src[src_offset[0]:src_offset[0]+ist_rect[2], src_offset[1]:src_offset[1]+ist_rect[3]]
         else:
-            image[ist_rect[0]:ist_rect[0]+ist_rect[2], ist_rect[1]:ist_rect[1]+ist_rect[3]]=\
-                slice_data[src_offset[0]:src_offset[0]+ist_rect[2], src_offset[1]:src_offset[1]+ist_rect[3]]
-        return image
+            dst[ist_rect[0]:ist_rect[0]+ist_rect[2], ist_rect[1]:ist_rect[1]+ist_rect[3]]=\
+                src[src_offset[0]:src_offset[0]+ist_rect[2], src_offset[1]:src_offset[1]+ist_rect[3]]
+        return dst
 
 def _load_nifti(nii_path):
     return nib.load(nii_path).get_fdata().astype('float32')
