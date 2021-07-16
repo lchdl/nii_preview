@@ -32,3 +32,16 @@ ensure that the visualization result is the same with that of [MIPAV](https://mi
        width="800"
   />
 </p>
+
+Now I added support for image resampling (for propoerly visualizing images with anisotropic resolution) and 
+color overlays (such as visualizing lesions).
+
+Example:
+
+<pre>
+# draw mask on image, also resample the image to have isotropic resolution
+# setting font size and blend weight 
+lightbox('original_image.nii.gz', 4,5,'test_lightbox3.png',view_axis='coronal',
+    nii_mask='segmentation.nii.gz', color_palette=[(255,0,0)],blend_weight=0.5,
+    resample=0.5, font_size=2)
+</pre>
