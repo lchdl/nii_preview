@@ -3,7 +3,6 @@ matplotlib.use('agg') # use matplotlib in command line mode
 import warnings
 import numpy as np
 from matplotlib.pyplot import imsave
-from scipy.ndimage import zoom
 import nibabel as nib
 from nibabel import processing as nibproc # used for resample images
 
@@ -73,6 +72,12 @@ def _paste_slice(src, dst, x, y):
 
 def _load_nifti(nii_path):
     return nib.load(nii_path).get_fdata().astype('float32')
+
+# original answer from:
+# https://stackoverflow.com/questions/45027220/expanding-zooming-in-a-numpy-array
+# ratio must be an integer
+def _int_zoom(array, ratio):
+    return np.kron(array, np.ones((ratio,ratio)))
 
 def lightbox(
         # 1. basic options:
@@ -194,7 +199,7 @@ def lightbox(
                     numbering_pos = (slice_shape[0]*ix+2, slice_shape[1]*iy+2)
                     for ig in range(3): # max 3 digits
                         selected_glyph = glyph[int(slice_str[ig])]
-                        selected_glyph = zoom(selected_glyph, font_size, order=0)
+                        selected_glyph = _int_zoom(selected_glyph, font_size)
                         _paste_slice(selected_glyph, image, numbering_pos[0]+ig*6*font_size, numbering_pos[1])
             current_slice = int(current_slice + slice_step)
 
