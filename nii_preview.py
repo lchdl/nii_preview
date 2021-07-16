@@ -23,6 +23,8 @@ glyph = [
 
 # _rect_intersect():
 # utility function to calculate the intersection of the two rectangles (x,y,w,h)
+# original source is from:
+# https://answers.opencv.org/question/90455/how-to-perform-intersection-or-union-operations-on-a-rect-in-python/
 def _rect_intersect(a, b):
     '''
     a: (x1,y1,w1,h1)
