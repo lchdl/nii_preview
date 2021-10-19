@@ -92,7 +92,11 @@ def lightbox(
         # from 0~5. resample_order=0 means nearest interpolation, 1 means linear interpolation.
         # maximum order is up to 5.
         resample=None, resample_order=1,
-        # 4. miscellaneous options below
+        # 4. intensity normalization options:
+        # default normalization strategy is to scale the whole image (image.min(), image.max()) between 0~1.
+        # howewer you can specify a custom range.
+        intensity_range = None, # e,g: intensity_range = [0.0, 1000.0]
+        # 5. miscellaneous options below
         show_slice_number=True, font_size=1):
     
     nii_data = _load_nifti(nii_file)
@@ -111,7 +115,6 @@ def lightbox(
     
     # nii_data: intensity image
     # nii_mask_data: color overlay, color is assigned by user defined color palette
-
 
     # resample image if needed.
     # this happens when you want to show a NIFTI image with anisotropic resolution
@@ -175,6 +178,10 @@ def lightbox(
     image = np.zeros([image_width, image_height, 3]) # RGB channel
 
     # normalize nii intensity
+    if intensity_range is not None:
+        lo, hi = intensity_range
+        nii_data_tr = np.where(nii_data_tr > hi, hi, nii_data_tr)
+        nii_data_tr = np.where(nii_data_tr < lo, lo, nii_data_tr)
     nii_data_tr = (nii_data_tr - nii_data_tr.min()) / (nii_data_tr.max()-nii_data_tr.min() + 0.00001)
 
     current_slice = slice_start
@@ -203,5 +210,5 @@ def lightbox(
                         _paste_slice(selected_glyph, image, numbering_pos[0]+ig*6*font_size, numbering_pos[1])
             current_slice = int(current_slice + slice_step)
 
-    imsave(save_path, np.transpose(image,[1,0,2])) # dont forget to transpose the matrix before saving!
+    imsave(save_path, np.transpose(image,[1,0,2])) # don't forget to transpose the matrix before saving!
     
